@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.meiqi-2019",
+  "name": "MeiQi 2019",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Uses Direct3D 11 so the game's settings menu remains visible.",
+  "useWhen": "Opening Settings hides the menu or leaves its controls invisible.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "1549440" }] },
+  "fixes": {
+    "environment": { "set": { "CELL_UNREAL_RHI": "dx11" } },
+    "notes": ["Uses the renderer verified to display this game's menus."]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.example.sky",
+  "name": "Sky: Children of the Light",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Developer example with a Windows DNS probe, a shell hook and optional key mappings.",
+  "useWhen": "Check Steam connectivity or learn how to make a .cell plugin.",
+  "homepage": "https://thatgamecompany.helpshift.com/hc/en/19-sky-pc-steam/",
+  "icon": "picture.png",
+  "match": { "all": [{ "steamAppID": "2325290" }] },
+  "scope": { "platforms": ["windows"] },
+  "options": [
+    { "id": "checkAtLaunch", "title": "Check DNS before Cell launches Sky", "type": "toggle", "default": "false" },
+    { "id": "arrowKeys", "title": "Map arrow keys to WASD", "type": "toggle", "default": "false" }
+  ],
+  "optionFixes": {
+    "arrowKeys": { "wine": { "keyMappings": { "Up": "W", "Left": "A", "Down": "S", "Right": "D" } } }
+  },
+  "scripts": { "preLaunch": "check-network.zsh" },
+  "actions": [
+    { "id": "windowsDns", "title": "Check Windows DNS", "runner": "wine", "file": "SkyDNSProbe.exe" },
+    { "id": "hostDns", "title": "Check Host DNS", "runner": "shell", "file": "check-network.zsh", "arguments": ["--manual"] }
+  ],
+  "fixes": {
+    "notes": [
+      "Use Steam to play on PC. To use progress from Google or Apple, sign in to that Sky profile on mobile and link your Steam account from Settings → Account.",
+      "This example probes public DNS endpoints and does not request account credentials."
+    ]
+  }
+}

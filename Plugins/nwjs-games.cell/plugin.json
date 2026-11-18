@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.engine.nwjs-games",
+  "name": "RPG Maker MV/MZ and other NW.js games",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Games built on NW.js (Chromium) draw inside the game process, so the window doesn't stay black. WebGL keeps using the graphics card.",
+  "useWhen": "An RPG Maker MV/MZ (or other NW.js) game opens a black window.",
+  "priority": 0,
+  "scope": {
+    "containers": "all",
+    "platforms": [
+      "windows"
+    ]
+  },
+  "match": {
+    "any": [
+      {
+        "fileExists": "nw.dll"
+      },
+      {
+        "fileExists": "nw_elf.dll"
+      }
+    ]
+  },
+  "fixes": {
+    "arguments": {
+      "append": [
+        "--in-process-gpu"
+      ]
+    },
+    "notes": [
+      "NW.js is Chromium: its separate GPU process can't draw into the game's window under Wine on macOS."
+    ]
+  }
+}

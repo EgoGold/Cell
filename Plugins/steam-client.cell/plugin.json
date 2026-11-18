@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.steam-client",
+  "name": "Steam client",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Smooth trackpad scrolling and Windows 10 mode for the Steam client, so the store, library and chat feel native.",
+  "useWhen": "Steam's window is black or blank, or Steam keeps restarting itself.",
+  "priority": 0,
+  "match": {
+    "any": [
+      {
+        "appKind": "steamClient"
+      },
+      {
+        "executable": "steam.exe"
+      }
+    ]
+  },
+  "fixes": {
+    "wine": {
+      "scrollMode": "smooth",
+      "windowsVersion": "win10"
+    },
+    "notes": [
+      "Typing Chinese, Japanese or Korean in Steam needs the container language set to that language. Automatic does this when such an input method is enabled on your Mac.",
+      "If the in-game overlay won't open, use “Open Steam Friends” in Cell's menu bar item to invite friends from the friends list instead."
+    ]
+  },
+  "diagnostics": [
+    {
+      "id": "steam.cef-crash",
+      "log": "wine",
+      "pattern": "steamwebhelper.*(crash|exited|not responding)",
+      "severity": "warning",
+      "title": "Steam's web view crashed",
+      "advice": "Keep “Fix Steam's black or blank window” on in the container's Steam settings, then quit and reopen Steam from Cell."
+    }
+  ]
+}

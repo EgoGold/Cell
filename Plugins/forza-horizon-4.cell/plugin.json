@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.forza-horizon-4",
+  "name": "Forza Horizon 4",
+  "version": "1.0.1",
+  "author": "Cell",
+  "summary": "Enables D3DMetal for Direct3D 12 and configures GPU profile spoofing and windowed startup.",
+  "useWhen": "Forza Horizon 4 opens with a black or blank screen, or stalls during startup before reaching the menu or Xbox sign-in.",
+  "priority": 10,
+  "match": {
+    "any": [
+      { "steamAppID": "1293830" },
+      { "executable": "ForzaHorizon4.exe" },
+      { "productName": "Forza Horizon 4*" }
+    ]
+  },
+  "options": [
+    {
+      "id": "gpuProfile",
+      "title": "GPU profile",
+      "type": "choice",
+      "choices": [
+        "Intel Arc A750",
+        "NVIDIA RTX 3070",
+        "AMD Radeon RX 6700 XT",
+        "Native Apple Silicon"
+      ],
+      "default": "Intel Arc A750",
+      "help": "Spoofs a dedicated desktop GPU to satisfy Forza Horizon 4's hardware detection under D3DMetal."
+    },
+    {
+      "id": "windowedStartup",
+      "title": "Windowed startup mode",
+      "type": "toggle",
+      "default": "true",
+      "help": "Starts in windowed mode to avoid the D3D12 exclusive fullscreen black screen bug. Press Alt+Enter to switch display modes in-game."
+    },
+    {
+      "id": "directLaunch",
+      "title": "Direct game launch",
+      "type": "toggle",
+      "default": "false",
+      "help": "Starts ForzaHorizon4.exe directly with D3DMetal and Steam integration rather than launching through the Steam client UI."
+    }
+  ],
+  "fixes": {
+    "graphics": {
+      "prefer": ["d3dmetal"]
+    },
+    "registry": [
+      {
+        "key": "DllOverrides",
+        "name": "amd_ags_x64",
+        "type": "delete",
+        "scope": "app"
+      }
+    ],
+    "environment": {
+      "set": {
+        "D3DM_VENDOR_ID": "0x8086",
+        "D3DM_DEVICE_ID": "0x56a1",
+        "D3DM_DEVICE_DESCRIPTION": "Intel(R) Arc(TM) A750 Graphics"
+      }
+    },
+    "wine": {
+      "startFullscreen": false,
+      "preferBorderlessFullscreen": false,
+      "scrollMode": "notched"
+    },
+    "notes": [
+      "Uses D3DMetal for Direct3D 12 translation.",
+      "Spoofs an Intel Arc A750 GPU profile by default to satisfy D3D12 hardware validation under D3DMetal (configurable under Options).",
+      "Starts in windowed mode to avoid exclusive fullscreen swapchain hangs. Use Alt+Enter to toggle fullscreen once loaded."
+    ]
+  },
+  "optionFixes": {
+    "gpuProfile=Intel Arc A750": {
+      "environment": {
+        "set": {
+          "D3DM_VENDOR_ID": "0x8086",
+          "D3DM_DEVICE_ID": "0x56a1",
+          "D3DM_DEVICE_DESCRIPTION": "Intel(R) Arc(TM) A750 Graphics"
+        }
+      }
+    },
+    "gpuProfile=NVIDIA RTX 3070": {
+      "environment": {
+        "set": {
+          "D3DM_VENDOR_ID": "0x10de",
+          "D3DM_DEVICE_ID": "0x2484",
+          "D3DM_DEVICE_DESCRIPTION": "NVIDIA GeForce RTX 3070"
+        }
+      }
+    },
+    "gpuProfile=AMD Radeon RX 6700 XT": {
+      "environment": {
+        "set": {
+          "D3DM_VENDOR_ID": "0x1002",
+          "D3DM_DEVICE_ID": "0x73df",
+          "D3DM_DEVICE_DESCRIPTION": "AMD Radeon RX 6700 XT"
+        }
+      }
+    },
+    "gpuProfile=Native Apple Silicon": {
+      "environment": {
+        "set": {
+          "D3DM_VENDOR_ID": "",
+          "D3DM_DEVICE_ID": "",
+          "D3DM_DEVICE_DESCRIPTION": ""
+        }
+      }
+    },
+    "windowedStartup": {
+      "wine": {
+        "startFullscreen": false,
+        "preferBorderlessFullscreen": false
+      }
+    },
+    "directLaunch": {
+      "steam": {
+        "preferGameExecutable": true
+      }
+    }
+  }
+}

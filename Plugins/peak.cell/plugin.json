@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.peak",
+  "name": "PEAK",
+  "version": "1.2.0",
+  "author": "Cell",
+  "summary": "Starts PEAK in DirectX 11 and adds diagnostics for Steam lobbies and Photon multiplayer.",
+  "useWhen": "PEAK crashes on start, has graphics glitches, or online play doesn't connect.",
+  "priority": 10,
+  "match": {
+    "any": [
+      {
+        "steamAppID": "3527290"
+      },
+      {
+        "executable": "PEAK.exe",
+        "engine": "unity"
+      }
+    ]
+  },
+  "fixes": {
+    "engine": {
+      "prefer": [
+        "newest"
+      ]
+    },
+    "graphics": {
+      "prefer": [
+        "dxmt",
+        "d3dmetal"
+      ]
+    },
+    "arguments": {
+      "append": [
+        "-force-d3d11"
+      ]
+    },
+    "wine": {
+      "scrollMode": "notched",
+      "windowsVersion": "win10"
+    },
+    "notes": [
+      "PEAK (Unity 6) reads the mouse through Unity's new input system. Older Wine engines (including Wine 11.0) don't deliver that input, so the mouse seems dead. Cell runs PEAK on the newest Wine you have; if the mouse still doesn't move, pick another engine on this page.",
+      "Cell starts PEAK in DirectX 11 on every graphics backend. If you launch from Steam’s Library, select DirectX 11 in Steam’s launch options.",
+      "To join a friend, leave your current lobby and accept the invite from PEAK’s main menu. You can also enter the host’s room code under Join Game. Find the room code in the lobby’s pause menu."
+    ]
+  },
+  "diagnostics": [
+    {
+      "id": "peak.invite-in-room",
+      "log": "{unityPlayerLog}",
+      "pattern": "Not joining invite because you're already in a room",
+      "severity": "warning",
+      "title": "PEAK declined the invite while you were in a room",
+      "advice": "Return to the main menu before accepting the Steam invite or entering the host’s room code under Join Game."
+    },
+    {
+      "id": "peak.photon-timeout",
+      "log": "{unityPlayerLog}",
+      "pattern": "TimeoutDisconnect\\. Client state was: ConnectingTo(?:Name|Master)Server",
+      "severity": "warning",
+      "title": "PEAK timed out connecting to Photon",
+      "advice": "Use Retry on PEAK’s connection prompt. If it keeps timing out while a VPN or proxy is active, check how it routes outgoing Photon traffic on UDP ports 5055–5058."
+    },
+    {
+      "id": "peak.photon-invalid-region",
+      "log": "{unityPlayerLog}",
+      "pattern": "OperationResponse 230: ReturnCode: 32756 \\(Cloud peak / Region [^,;)\\r\\n]+,[^;)\\r\\n]+ is not available\\.\\)",
+      "severity": "warning",
+      "title": "PEAK sent Photon a region list instead of one region",
+      "advice": "Check the route to Photon, then restart PEAK. Clearing the region cache alone does not help if PEAK still cannot reach the region servers."
+    },
+    {
+      "id": "peak.photon-auth",
+      "log": "{unityPlayerLog}",
+      "pattern": "OperationResponse 230: ReturnCode: 32755",
+      "severity": "warning",
+      "title": "Photon rejected the Steam login ticket",
+      "advice": "Quit PEAK, choose “Restart Steam” on the container page, then start PEAK from Cell again."
+    },
+    {
+      "id": "peak.photon-udp",
+      "log": "{unityPlayerLog}",
+      "pattern": "ExceptionOnReceive.*SocketErrorCode: 10061",
+      "severity": "info",
+      "title": "Photon’s UDP connection was refused",
+      "advice": "Check the outgoing route to Photon if PEAK cannot host or join lobbies."
+    }
+  ]
+}

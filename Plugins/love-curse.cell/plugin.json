@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.love-curse",
+  "name": "Love Curse: Find Your Soulmate",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Uses the Windows audio path verified to avoid buzzing in this game.",
+  "useWhen": "Music has electrical buzzing or distortion.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "3069120" }] },
+  "fixes": {
+    "environment": { "set": { "SDL_AUDIODRIVER": "winmm" } },
+    "notes": ["Uses WinMM audio for this game."]
+  }
+}

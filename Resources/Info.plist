@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>Cell</string>
+	<key>CFBundleDisplayName</key>
+	<string>Cell</string>
+	<key>CFBundleIdentifier</key>
+	<string>app.cell.Cell</string>
+	<key>CFBundleExecutable</key>
+	<string>Cell</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.3.0</string>
+	<key>CFBundleVersion</key>
+	<string>3</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>15.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.games</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Cell — run Windows apps on your Mac.</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>app.cell.plugin-package</string>
+			<key>UTTypeDescription</key>
+			<string>Cell Plugin Package</string>
+			<key>UTTypeConformsTo</key>
+			<array><string>com.pkware.zip-archive</string></array>
+			<key>UTTypeTagSpecification</key>
+			<dict><key>public.filename-extension</key><string>cell</string></dict>
+		</dict>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Windows Program</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>exe</string>
+				<string>msi</string>
+				<string>lnk</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Cell Plugin</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array><string>app.cell.plugin-package</string></array>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cell</string>
+				<string>cellplug</string>
+				<string>cellplugin</string>
+				<string>chamberplugin</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

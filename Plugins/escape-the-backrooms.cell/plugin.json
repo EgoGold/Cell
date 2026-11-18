@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.escape-the-backrooms",
+  "name": "Escape the Backrooms",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Pins the game to borderless fullscreen at the Mac's native resolution before every launch, which stops the resolution switching bug.",
+  "useWhen": "Escape the Backrooms says DirectX 12 isn't supported, or looks blurry.",
+  "priority": 10,
+  "match": {
+    "any": [
+      {
+        "steamAppID": "1943950"
+      },
+      {
+        "executable": "*Backrooms*-Win64-Shipping.exe"
+      },
+      {
+        "productName": "Escape the Backrooms*"
+      }
+    ]
+  },
+  "fixes": {
+    "ini": [
+      {
+        "file": "{localAppData}/{unrealProject}/Saved/Config/WindowsNoEditor/GameUserSettings.ini",
+        "section": "/Script/Engine.GameUserSettings",
+        "create": true,
+        "set": {
+          "FullscreenMode": "1",
+          "LastConfirmedFullscreenMode": "1",
+          "PreferredFullscreenMode": "1",
+          "ResolutionSizeX": "{screenWidth}",
+          "ResolutionSizeY": "{screenHeight}",
+          "LastUserConfirmedResolutionSizeX": "{screenWidth}",
+          "LastUserConfirmedResolutionSizeY": "{screenHeight}"
+        }
+      },
+      {
+        "file": "{localAppData}/{unrealProject}/Saved/Config/Windows/GameUserSettings.ini",
+        "section": "/Script/Engine.GameUserSettings",
+        "create": false,
+        "set": {
+          "FullscreenMode": "1",
+          "LastConfirmedFullscreenMode": "1",
+          "PreferredFullscreenMode": "1",
+          "ResolutionSizeX": "{screenWidth}",
+          "ResolutionSizeY": "{screenHeight}"
+        }
+      }
+    ],
+    "wine": {
+      "scrollMode": "notched"
+    },
+    "notes": [
+      "Change the resolution scale inside the game instead of the resolution; Cell resets the window mode to borderless fullscreen on every launch."
+    ]
+  }
+}

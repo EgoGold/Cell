@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.engine.unity",
+  "name": "Unity games",
+  "version": "1.2.0",
+  "author": "Cell",
+  "summary": "Runs Unity 2019+ games in borderless fullscreen at the Mac's native resolution, which avoids Unity's exclusive-fullscreen resolution switching bugs, and uses its Direct3D 11 renderer under DXMT.",
+  "useWhen": "A Unity game opens in the wrong resolution, flickers when switching, or crashes with its Direct3D 12 renderer.",
+  "priority": 0,
+  "match": {
+    "all": [
+      {
+        "engine": "unity",
+        "engineVersion": ">=2019"
+      }
+    ]
+  },
+  "fixes": {
+    "graphics": {
+      "prefer": [
+        "dxmt",
+        "d3dmetal"
+      ]
+    },
+    "arguments": {
+      "whenBackend": {
+        "dxmt": [
+          "-force-d3d11"
+        ],
+        "dxvk": [
+          "-force-d3d11"
+        ]
+      }
+    },
+    "wine": { "preferBorderlessFullscreen": true },
+    "notes": [
+      "Borderless fullscreen keeps the Mac's display mode, so switching resolution in the game no longer breaks the picture."
+    ]
+  },
+  "diagnostics": [
+    {
+      "id": "unity.gfx-device-failed",
+      "log": "{unityPlayerLog}",
+      "pattern": "Failed to (initialize|create) (the )?(graphics|GfxDevice|Direct3D)",
+      "severity": "error",
+      "title": "Unity could not start its renderer",
+      "advice": "Cell will try the next graphics engine. You can also pick D3DMetal manually on the game's page."
+    }
+  ]
+}

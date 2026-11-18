@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.engine.unreal",
+  "name": "Unreal Engine games",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Skips the startup movies that often hang under Wine and keeps Unreal games in game-style scrolling and display capture.",
+  "useWhen": "An Unreal Engine game says DirectX 12 isn't supported, stutters on start, or opens at the wrong size.",
+  "priority": 0,
+  "match": {
+    "all": [
+      {
+        "engine": "unreal"
+      }
+    ]
+  },
+  "fixes": {
+    "arguments": {
+      "append": [
+        "-nosplash"
+      ]
+    },
+    "wine": {
+      "scrollMode": "notched"
+    },
+    "notes": [
+      "Unreal Engine 5 compiles shaders on first launch; the first minutes can stutter. It gets smooth after the shader cache is built."
+    ]
+  },
+  "diagnostics": [
+    {
+      "id": "unreal.rhi-failed",
+      "log": "wine",
+      "pattern": "(D3D12|D3D11)RHI.*(failed|not supported)|DX12 is not supported",
+      "severity": "error",
+      "title": "Unreal could not start Direct3D",
+      "advice": "Cell will try the other engine automatically (DXMT runs Unreal's -dx11 renderer)."
+    }
+  ]
+}

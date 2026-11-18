@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.the-rewinder",
+  "name": "The Rewinder",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Repairs fullscreen startup and selects Wine 11 with DXMT for controls after switching apps.",
+  "useWhen": "The game loses movement or menu controls when returning from a Mac app, or starts with an oversized autosave notice.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "1161170" }] },
+  "fixes": {
+    "engine": { "minimumWineVersion": "11.0", "prefer": ["bundled-dxmt"] },
+    "graphics": { "prefer": ["dxmt"] },
+    "environment": { "set": { "CELL_UNITY_DISPLAY_RECOVERY": "1" } },
+    "arguments": { "append": ["-window-mode", "borderless"] },
+    "notes": ["Launch from Cell to apply the engine choice. Steam Library games use the engine Steam already runs on.", "Display recovery respects the game's native-resolution setting."]
+  }
+}

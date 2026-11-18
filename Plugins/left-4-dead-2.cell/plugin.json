@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.left-4-dead-2",
+  "name": "Left 4 Dead 2",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Corrects the game’s Retina scaling and recovers screen-sized windows that start off-screen.",
+  "useWhen": "The game appears black or the picture fills only part of its window.",
+  "priority": 10,
+  "match": {
+    "all": [{ "steamAppID": "550" }]
+  },
+  "fixes": {
+    "wine": { "nativeResolution": true },
+    "environment": { "set": { "CELL_REPOSITION_OFFSCREEN": "left4dead2.exe" } }
+  }
+}

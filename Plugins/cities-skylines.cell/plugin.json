@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.cities-skylines",
+  "name": "Cities: Skylines",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Runs the Cities: Skylines Paradox Launcher with software rendering under Wine.",
+  "useWhen": "Cities: Skylines opens a blank Paradox Launcher window.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "255710" }] },
+  "options": [
+    { "id": "skipLauncher", "title": "Skip Paradox Launcher", "type": "toggle", "default": "false",
+      "help": "Start Cities directly from Cell if the launcher cannot finish updating." }
+  ],
+  "optionFixes": {
+    "skipLauncher": { "steam": { "preferGameExecutable": true } }
+  },
+  "fixes": {
+    "steam": { "launchArguments": ["--pdxlDisableHardwareAcceleration", "--pdxlEnableInProcessGpu"] },
+    "notes": ["For Steam’s Library Play button, add --pdxlDisableHardwareAcceleration --pdxlEnableInProcessGpu to this game’s Steam launch options."]
+  }
+}

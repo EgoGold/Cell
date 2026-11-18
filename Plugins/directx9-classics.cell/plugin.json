@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.api.directx9",
+  "name": "DirectX 9 and older games",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Keeps classic Direct3D 9/8 and DirectDraw games on WineD3D and lets DirectInput games recapture the mouse (fixes spinning or stuck cameras).",
+  "useWhen": "An older DirectX 9 (or earlier) game shows a black screen, wrong colors or crashes when it starts.",
+  "priority": -5,
+  "match": {
+    "any": [
+      {
+        "graphicsAPI": "d3d9"
+      },
+      {
+        "graphicsAPI": "d3d8"
+      },
+      {
+        "graphicsAPI": "ddraw"
+      }
+    ],
+    "none": [
+      {
+        "graphicsAPI": "d3d11"
+      },
+      {
+        "graphicsAPI": "d3d12"
+      }
+    ]
+  },
+  "fixes": {
+    "graphics": {
+      "prefer": [
+        "wined3d"
+      ]
+    },
+    "wine": {
+      "mouseWarp": "force",
+      "scrollMode": "notched"
+    }
+  }
+}

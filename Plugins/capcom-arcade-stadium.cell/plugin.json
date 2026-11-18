@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.capcom-arcade-stadium",
+  "name": "Capcom Arcade Stadium",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Avoids a startup movie playback stall.",
+  "useWhen": "The game shows its logo and then stays on a black screen.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "1515950" }] },
+  "fixes": {
+    "environment": { "set": { "CELL_MEDIA_QUEUE_MB": "32" } },
+    "notes": ["Adjusts movie buffering during startup."]
+  }
+}

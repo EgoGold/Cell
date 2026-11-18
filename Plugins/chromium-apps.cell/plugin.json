@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.engine.chromium-apps",
+  "name": "Electron and CEF apps",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Launchers and apps built on Chromium (Electron, CEF) draw their window inside the main process, the fix that keeps Steam's window from staying blank or black.",
+  "useWhen": "A launcher or app built on Electron or CEF opens a black, white or empty window.",
+  "priority": 0,
+  "scope": {
+    "containers": "all",
+    "platforms": [
+      "windows"
+    ]
+  },
+  "match": {
+    "any": [
+      {
+        "engine": "electron"
+      },
+      {
+        "engine": "cef"
+      }
+    ],
+    "none": [{ "graphicsAPI": "d3d12" }]
+  },
+  "fixes": {
+    "arguments": {
+      "append": [
+        "--in-process-gpu",
+        "--disable-gpu"
+      ]
+    },
+    "notes": [
+      "Chromium's separate GPU process can't draw into another process's window under Wine on macOS, so the window stayed empty. These switches keep drawing in the app itself."
+    ]
+  }
+}

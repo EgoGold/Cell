@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.app.epic-games-launcher",
+  "name": "Epic Games Launcher",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Starts the Epic Games Launcher without its prerequisites installer, which can't run in Wine and stops the launcher from opening.",
+  "useWhen": "The Epic Games Launcher doesn't open, or keeps trying to install prerequisites.",
+  "priority": 0,
+  "scope": {
+    "containers": "all",
+    "platforms": [
+      "windows"
+    ]
+  },
+  "match": {
+    "any": [
+      {
+        "executable": "EpicGamesLauncher.exe"
+      }
+    ]
+  },
+  "fixes": {
+    "arguments": {
+      "append": [
+        "-SkipBuildPatchPrereq"
+      ]
+    },
+    "notes": [
+      "Epic's new setup program draws its window with WebView2, which doesn't draw under Wine yet, so Cell installs the launcher with Epic's classic installer package instead."
+    ]
+  }
+}

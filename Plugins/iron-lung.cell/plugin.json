@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.iron-lung",
+  "name": "Iron Lung",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Offers the Wine 11 and DXMT configuration tested for Iron Lung's freeze after switching apps.",
+  "useWhen": "Iron Lung stops updating after you switch back from another Mac app.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "1846170" }] },
+  "options": [
+    { "id": "wine11DXMT", "title": "Prefer Wine 11 with DXMT", "type": "toggle", "default": "false",
+      "help": "Install a Wine 11 engine with DXMT first. Use this in a separate container if other games need the current engine. Changing Wine engines stops the apps running in that container." }
+  ],
+  "optionFixes": {
+    "wine11DXMT": {
+      "engine": { "minimumWineVersion": "11.0" },
+      "graphics": { "prefer": ["dxmt"] },
+      "steam": { "overlay": "disabled" }
+    }
+  },
+  "fixes": {
+    "wine": { "preferBorderlessFullscreen": false },
+    "notes": ["Wine 11 (PK_DXMT revision 1) kept the camera working after repeated app switches in a controlled test. The flashes during camera movement are still under investigation."]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.cities-skylines-ii",
+  "name": "Cities: Skylines II",
+  "version": "1.1.0",
+  "author": "Cell",
+  "summary": "Uses Wine 11 and DXMT to prevent a filesystem error that can leave the game blank at startup.",
+  "useWhen": "The game stays blank, or its Unity log shows a directory enumeration error while starting Steamworks.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "949230" }] },
+  "fixes": {
+    "engine": { "minimumWineVersion": "11.0", "prefer": ["bundled-dxmt"] },
+    "graphics": { "prefer": ["dxmt"] },
+    "steam": { "compatibilityLaunchers": ["dowser.exe"] },
+    "arguments": { "whenBackend": { "dxmt": ["-force-d3d11"] } },
+    "wine": { "preferBorderlessFullscreen": false },
+    "notes": ["With a compatible engine installed, Cell can restart idle Steam if the game starts on older Wine."]
+  }
+}

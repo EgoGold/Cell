@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.game.malteses-fluffy-onsen",
+  "name": "Maltese's Fluffy Onsen",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Uses the game's desktop companion layout by default.",
+  "priority": 10,
+  "match": { "all": [{ "steamAppID": "3404470" }] },
+  "fixes": { "wine": { "startFullscreen": false, "preferBorderlessFullscreen": false } }
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "dev.cell.notice.anti-cheat",
+  "name": "Anti-cheat notice",
+  "version": "1.0.0",
+  "author": "Cell",
+  "summary": "Explains why online modes of games protected by kernel anti-cheat may refuse to start.",
+  "useWhen": "A game's online mode refuses to start or kicks you out with an anti-cheat error (Easy Anti-Cheat, BattlEye).",
+  "priority": -10,
+  "match": {
+    "any": [
+      {
+        "fileExists": "EasyAntiCheat"
+      },
+      {
+        "fileExists": "BattlEye"
+      },
+      {
+        "fileExists": "start_protected_game.exe"
+      }
+    ]
+  },
+  "fixes": {
+    "notes": [
+      "This game ships Easy Anti-Cheat or BattlEye. Single-player usually works; online modes only work if the developer enabled anti-cheat support for Wine/Proton."
+    ]
+  },
+  "diagnostics": [
+    {
+      "id": "anticheat.failed",
+      "log": "wine",
+      "pattern": "(EasyAntiCheat|BEService|BattlEye).*(fail|error|not)",
+      "severity": "error",
+      "title": "Anti-cheat refused to start",
+      "advice": "Try the game's offline or single-player mode."
+    }
+  ]
+}
