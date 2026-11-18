@@ -315,7 +315,7 @@ cell nat-test                                      # 检测 VPN/代理 UDP 穿�
 
 ### 构建运行
 ```bash
-git clone https://github.com/<your-username>/Cell.git
+git clone https://github.com/EgoGold/Cell.git
 cd Cell
 
 # 构建完整 Release 应用包（自动编译原生 Helper、打包内置 .cell 插件并生成 build/Cell.app）
