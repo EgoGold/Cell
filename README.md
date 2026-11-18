@@ -311,7 +311,7 @@ cell nat-test                                      # Test UDP reachability acros
 
 ### Build & Test
 ```bash
-git clone https://github.com/<your-username>/Cell.git
+git clone https://github.com/EgoGold/Cell.git
 cd Cell
 
 # Build the release app bundle (compiles native helpers, packs built-in .cell plugins -> build/Cell.app)
